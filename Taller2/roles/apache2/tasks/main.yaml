@@ -1,8 +1,9 @@
 - name: "ensure apache2 is installed"
   apt:
-    pkg: apache2
-- name: copy template index 
-  template: 
+    pkg:
+    - apache2
+- name: copy template index
+  template:
     src: index.j2
     dest: /var/www/html/index.html
     owner: www-data
@@ -20,9 +21,9 @@
 - name: "Copiar fichero de configuración y reiniciar el servicio"
   copy:
     src: etc/apache2/ports.conf
-    dest: /etc/apache2/ports.conf
+    dest: /root/ports.conf.failsafe
     owner: root
     group: root
     mode: '0644'
   notify:
-    - 
+    - restart apache2
